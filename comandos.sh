@@ -101,3 +101,43 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
    -> 0.0016s
 ==  CreateUsers: migrated (0.0017s) ===========================================
 
+# Creacion del recurso Micropost
+
+~/ruby/microposts$ rails generate scaffold Micropost content:string user_id:integer
+        SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+        This poses a security threat. It is strongly recommended that you
+        provide a secret to prevent exploits that may be possible from crafted
+        cookies. This will not be supported in future versions of Rack, and
+        future versions will even invalidate your existing user cookies.
+
+        Called from: /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/actionpack-3.2.3/lib/action_dispatch/middleware/session/abstract_store.rb:28:in `initialize'.
+      invoke  active_record
+      create    db/migrate/20190730042309_create_microposts.rb
+      create    app/models/micropost.rb
+      invoke    test_unit
+      create      test/unit/micropost_test.rb
+      create      test/fixtures/microposts.yml
+       route  resources :microposts
+      invoke  scaffold_controller
+      create    app/controllers/microposts_controller.rb
+      invoke    erb
+      create      app/views/microposts
+      create      app/views/microposts/index.html.erb
+      create      app/views/microposts/edit.html.erb
+      create      app/views/microposts/show.html.erb
+      create      app/views/microposts/new.html.erb
+      create      app/views/microposts/_form.html.erb
+      invoke    test_unit
+      create      test/functional/microposts_controller_test.rb
+      invoke    helper
+      create      app/helpers/microposts_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/microposts_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/microposts.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/microposts.css.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.css.scss
+creyes-dev@creyes:~/ruby/microposts$ 

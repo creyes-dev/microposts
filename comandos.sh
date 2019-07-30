@@ -110,7 +110,7 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
         cookies. This will not be supported in future versions of Rack, and
         future versions will even invalidate your existing user cookies.
 
-        Called from: /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/actionpack-3.2.3/lib/action_dispatch/middleware/session/abstract_store.rb:28:in `initialize'.
+        Called from: /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/actionpack-3.2.3/lib/action_dispatch/middleware/session/abstract_store.rb:28:in 'initialize'.
       invoke  active_record
       create    db/migrate/20190730042309_create_microposts.rb
       create    app/models/micropost.rb
@@ -141,3 +141,12 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
       invoke  scss
    identical    app/assets/stylesheets/scaffolds.css.scss
 creyes-dev@creyes:~/ruby/microposts$ 
+
+
+# Migrar la tabla Micropost a la base de datos según la migración de tabla sugerida por la creación del recurso Micropost
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  CreateMicroposts: migrating ===============================================
+-- create_table(:microposts)
+   -> 0.0185s
+==  CreateMicroposts: migrated (0.0186s) ======================================

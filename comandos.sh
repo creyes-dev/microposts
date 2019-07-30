@@ -150,3 +150,14 @@ creyes-dev@creyes:~/ruby/microposts$
 -- create_table(:microposts)
    -> 0.0185s
 ==  CreateMicroposts: migrated (0.0186s) ======================================
+
+# Verificar la relación entre User y Micropost
+
+~/ruby/microposts$ rails console
+Loading development environment (Rails 3.2.3)
+2.0.0-p648 :001 > first_user = User.first
+  User Load (0.1ms)  SELECT "users".* FROM "users" LIMIT 1
+ => #<User id: 1, name: "Cristian", email: "creyes.dev@gmail.com", created_at: "2019-07-30 03:25:37", updated_at: "2019-07-30 03:27:21"> 
+2.0.0-p648 :002 > first_user.microposts
+  Micropost Load (0.1ms)  SELECT "microposts".* FROM "microposts" WHERE "microposts"."user_id" = 1
+ => [#<Micropost id: 1, content: "Este es mi primer post!", user_id: 1, created_at: "2019-07-30 23:39:31", updated_at: "2019-07-30 23:39:31">] 

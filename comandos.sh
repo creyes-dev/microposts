@@ -161,3 +161,87 @@ Loading development environment (Rails 3.2.3)
 2.0.0-p648 :002 > first_user.microposts
   Micropost Load (0.1ms)  SELECT "microposts".* FROM "microposts" WHERE "microposts"."user_id" = 1
  => [#<Micropost id: 1, content: "Este es mi primer post!", user_id: 1, created_at: "2019-07-30 23:39:31", updated_at: "2019-07-30 23:39:31">] 
+
+# Instalar nuevas gemas requeridas por la aplicación, en entorno de desarrollo y testing 
+# se instala rspec-rails y en entorno de testing unicamente se instala capybara 
+
+~/ruby/microposts$ bundle install --without production
+Fetching gem metadata from https://rubygems.org/.............
+Fetching gem metadata from https://rubygems.org/.
+Resolving dependencies...
+Using rake 12.3.3
+Using concurrent-ruby 1.1.5
+Using i18n 0.9.5
+Using multi_json 1.13.1
+Using activesupport 3.2.3
+Using builder 3.0.4
+Using activemodel 3.2.3
+Using erubis 2.7.0
+Using journey 1.0.4
+Using rack 1.4.7
+Using rack-cache 1.9.0
+Using rack-test 0.6.3
+Using hike 1.2.3
+Using tilt 1.4.1
+Using sprockets 2.1.4
+Using actionpack 3.2.3
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.4.4
+Using actionmailer 3.2.3
+Using arel 3.0.3
+Using tzinfo 0.3.55
+Using activerecord 3.2.3
+Using activeresource 3.2.3
+Using bundler 1.16.6
+Fetching mini_portile2 2.1.0
+Installing mini_portile2 2.1.0
+Fetching nokogiri 1.6.8.1
+Installing nokogiri 1.6.8.1 with native extensions
+Using ffi 1.11.1
+Fetching childprocess 0.9.0
+Installing childprocess 0.9.0
+Fetching rubyzip 1.2.3
+Installing rubyzip 1.2.3
+Fetching websocket 1.2.8
+Installing websocket 1.2.8
+Fetching selenium-webdriver 2.53.4
+Installing selenium-webdriver 2.53.4
+Fetching xpath 0.1.4
+Installing xpath 0.1.4
+Fetching capybara 1.1.2
+Installing capybara 1.1.2
+Using coffee-script-source 1.12.2
+Using execjs 2.7.0
+Using coffee-script 2.4.1
+Using rack-ssl 1.3.4
+Using json 1.8.6
+Using rdoc 3.12.2
+Using thor 0.14.6
+Using railties 3.2.3
+Using coffee-rails 3.2.2
+Fetching diff-lcs 1.1.3
+Installing diff-lcs 1.1.3
+Using jquery-rails 2.0.1
+Using rails 3.2.3
+Using rb-fsevent 0.10.3
+Using rb-inotify 0.9.10
+Fetching rspec-core 2.9.0
+Installing rspec-core 2.9.0
+Fetching rspec-expectations 2.9.1
+Installing rspec-expectations 2.9.1
+Fetching rspec-mocks 2.9.0
+Installing rspec-mocks 2.9.0
+Fetching rspec 2.9.0
+Installing rspec 2.9.0
+Fetching rspec-rails 2.9.0
+Installing rspec-rails 2.9.0
+Using sass-listen 4.0.0
+Using sass 3.7.4
+Using sass-rails 3.2.4
+Using sqlite3 1.3.5
+Using uglifier 1.2.3
+Bundle complete! 9 Gemfile dependencies, 59 gems now installed.
+Gems in the group production were not installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.

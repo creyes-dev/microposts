@@ -245,3 +245,11 @@ Using uglifier 1.2.3
 Bundle complete! 9 Gemfile dependencies, 59 gems now installed.
 Gems in the group production were not installed.
 Use `bundle info [gemname]` to see where a bundled gem is installed.
+
+# Indicarle a Rails que vamos a usar RSpec en lugar de Test::Unit
+
+~/ruby/microposts$ rails generate rspec:install
+      create  .rspec
+      create  spec
+      create  spec/spec_helper.rb
+

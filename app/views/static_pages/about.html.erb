@@ -1,8 +1,9 @@
+<% provide(:title, 'About Us') %><!-- El layout leerá el valor que corresponde la symbol :title -->
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Ruby on Rails Tutorial Sample App | About Us</title>
+    <title>Ruby on Rails Tutorial Sample App | <%= yield(:title) %></title>
 </head>
 
 <body>

@@ -259,9 +259,9 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
        exist  spec
    identical  spec/spec_helper.rb
 
-# Crear el controller StaticPages
+# Crear el controller StaticPages, el mismo está compuesto de dos acciones definidas: home y help
 
-creyes-dev@creyes:~/ruby/microposts$ rails generate controller StaticPages home help --no-test-framework
+~/ruby/microposts$ rails generate controller StaticPages home help --no-test-framework
 
       create  app/controllers/static_pages_controller.rb
        route  get "static_pages/help"
@@ -277,4 +277,31 @@ creyes-dev@creyes:~/ruby/microposts$ rails generate controller StaticPages home 
       create      app/assets/javascripts/static_pages.js.coffee
       invoke    scss
       create      app/assets/stylesheets/static_pages.css.scss
+
+# Crear un test de integración (simula la interacción del usuario con el sistema) con el controller static_pages
+
+~/ruby/microposts$ rails generate integration_test static_pages
+
+        Called from: /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/actionpack-3.2.3/lib/action_dispatch/middleware/session/abstract_store.rb:28:in 'initialize'.
+      invoke  rspec
+      create    spec/requests/static_pages_spec.rb
+
+# Ejecutar rspec para obtener el resultado del test de integración
+
+~/ruby/microposts$ bundle exec rspec spec/requests/static_pages_spec.rb
+
+Failures:
+
+  1) StaticPages Home page deberia tener el contenido 'Sample app'
+     Failure/Error: page.should have_content('Sample App')
+       expected there to be content "Sample App" in "\n\n  Microposts\n  \n  \n  \n\n\n\nStaticPages#home\nFind me in app/views/static_pages/home.html.erb\n\n\n\n"
+     # ./spec/requests/static_pages_spec.rb:7:in `block (3 levels) in <top (required)>'
+
+Finished in 0.26622 seconds
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/static_pages_spec.rb:5 # StaticPages Home page deberia tener el contenido 'Sample app'
+
 

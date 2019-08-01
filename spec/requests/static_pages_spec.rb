@@ -7,6 +7,12 @@ describe "Static Pages" do
       visit '/static_pages/home'
       page.should have_content('Sample App')
     end
+
+    it "deberia tener el título 'Home'" do
+      visit '/static_pages/home'
+      page.should have_selector('title',
+        :text => "Ruby on Rails Tutorial Sample App | Home")
+    end
   end
 
   describe "Help page" do
@@ -14,12 +20,24 @@ describe "Static Pages" do
       visit '/static_pages/help'
       page.should have_content('Help')
     end
+
+    it "debería tener el título 'Help'" do
+      visit '/static_pages/help'
+      page.should have_selector('title',
+      :text => "Ruby on Rails Tutorial Sample App | Help")
+    end
   end
 
   describe "About page" do
     it "deberia tener el contenido 'About Us" do
       visit '/static_pages/about'
       page.should have_content('About Us')
+    end
+
+    it "debería tener el título 'About Us'" do
+      visit '/static_pages/about'
+      page.should have_selector('title',
+      :text => "Ruby on Rails Tutorial Sample App | About Us")
     end
   end
 

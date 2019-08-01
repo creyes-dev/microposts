@@ -314,3 +314,7 @@ Rack::File headers parameter replaces cache_control after Rack 1.5.
 Finished in 0.10613 seconds
 1 example, 0 failures
 
+~/ruby/microposts$ bundle exec rspec spec/requests/static_pages_spec.rb
+
+Finished in 0.12128 seconds
+6 examples, 0 failures

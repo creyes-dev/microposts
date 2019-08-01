@@ -16,4 +16,11 @@ describe "Static Pages" do
     end
   end
 
+  describe "About page" do
+    it "deberia tener el contenido 'About Us" do
+      visit '/static_pages/about'
+      page.should have_content('About Us')
+    end
+  end
+
 end

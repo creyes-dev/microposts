@@ -41,4 +41,17 @@ describe "Static Pages" do
     end
   end
 
+  describe "Contact page" do
+    it "deberia tener el contenido 'Contact" do
+      visit '/static_pages/contact'
+      page.should have_content('Contact')
+    end
+
+    it "debería tener el título 'Contact'" do
+      visit '/static_pages/contact'
+      page.should have_selector('title',
+      :text => "Ruby on Rails Tutorial Sample App | Contact")
+    end
+  end
+
 end

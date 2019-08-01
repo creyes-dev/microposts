@@ -304,4 +304,13 @@ Failed examples:
 
 rspec ./spec/requests/static_pages_spec.rb:5 # StaticPages Home page deberia tener el contenido 'Sample app'
 
+# Volver a ejecutar el test de integración
+
+~/ruby/microposts$ bundle exec rspec spec/requests/static_pages_spec.rb
+
+Rack::File headers parameter replaces cache_control after Rack 1.5.
+.
+
+Finished in 0.10613 seconds
+1 example, 0 failures
 

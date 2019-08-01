@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "StaticPages" do
+describe "Static Pages" do
   describe "Home page" do
     it "deberia tener el contenido 'Sample app'" do
       visit '/static_pages/home'

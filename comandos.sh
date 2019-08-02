@@ -318,3 +318,77 @@ Finished in 0.10613 seconds
 
 Finished in 0.12128 seconds
 6 examples, 0 failures
+
+# Instalar bootstrap-sass
+
+~/ruby/microposts$ bundle install --without production
+Fetching gem metadata from https://rubygems.org/.............
+Fetching gem metadata from https://rubygems.org/.
+Resolving dependencies...
+Using rake 12.3.3
+Using concurrent-ruby 1.1.5
+Using i18n 0.9.5
+Using multi_json 1.13.1
+Using activesupport 3.2.3
+Using builder 3.0.4
+Using activemodel 3.2.3
+Using erubis 2.7.0
+Using journey 1.0.4
+Using rack 1.4.7
+Using rack-cache 1.9.0
+Using rack-test 0.6.3
+Using hike 1.2.3
+Using tilt 1.4.1
+Using sprockets 2.1.4
+Using actionpack 3.2.3
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.4.4
+Using actionmailer 3.2.3
+Using arel 3.0.3
+Using tzinfo 0.3.55
+Using activerecord 3.2.3
+Using activeresource 3.2.3
+Fetching bootstrap-sass 2.0.0
+Installing bootstrap-sass 2.0.0
+Using bundler 1.16.6
+Using mini_portile2 2.1.0
+Using nokogiri 1.6.8.1
+Using ffi 1.11.1
+Using childprocess 0.9.0
+Using rubyzip 1.2.3
+Using websocket 1.2.8
+Using selenium-webdriver 2.53.4
+Using xpath 0.1.4
+Using capybara 1.1.2
+Using coffee-script-source 1.12.2
+Using execjs 2.7.0
+Using coffee-script 2.4.1
+Using rack-ssl 1.3.4
+Using json 1.8.6
+Using rdoc 3.12.2
+Using thor 0.14.6
+Using railties 3.2.3
+Using coffee-rails 3.2.2
+Using diff-lcs 1.1.3
+Using jquery-rails 2.0.1
+Using rails 3.2.3
+Using rb-fsevent 0.10.3
+Using rb-inotify 0.9.10
+Using rspec-core 2.9.0
+Using rspec-expectations 2.9.1
+Using rspec-mocks 2.9.0
+Using rspec 2.9.0
+Using rspec-rails 2.9.0
+Using sass-listen 4.0.0
+Using sass 3.7.4
+Using sass-rails 3.2.4
+Using sqlite3 1.3.5
+Using uglifier 1.2.3
+Bundle complete! 10 Gemfile dependencies, 60 gems now installed.
+Gems in the group production were not installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+
+
+

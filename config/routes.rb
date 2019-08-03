@@ -1,14 +1,23 @@
 Microposts::Application.routes.draw do
-  get "static_pages/home"
 
-  get "static_pages/help"
-  
-  get "static_pages/about"
+  root to: 'static_pages#home'
 
-  get "static_pages/contact"
+  match '/', to: 'static_pages#home'
+  match '/root', to: 'static_pages#home'
+  match '/home', to: 'static_pages#home'
+  match '/help', to: 'static_pages#help' # válido para help_path y /help, la diferencia no importa
+  match '/about', to: 'static_pages#about'
+  match '/contact', to: 'static_pages#contact'
+  match '/contact', to: 'static_pages#contact'
+  match '/signin', to: 'static_pages#home'
+  match '/signup', to: 'static_pages#home'
+
+  # get "static_pages/home"
+  # get "static_pages/help"
+  # get "static_pages/about"
+  # get "static_pages/contact"
 
   resources :microposts
-
   resources :users
 
   # The priority is based upon order of creation:

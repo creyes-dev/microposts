@@ -390,5 +390,11 @@ Bundle complete! 10 Gemfile dependencies, 60 gems now installed.
 Gems in the group production were not installed.
 Use `bundle info [gemname]` to see where a bundled gem is installed.
 
+# Generar tests de integración de las páginas relacionadas con la gestión de usuarios
+
+~/ruby/microposts$ rails generate integration_test user_pages
+
+      invoke  rspec
+      create    spec/requests/user_pages_spec.rb
 
 

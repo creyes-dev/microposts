@@ -460,4 +460,20 @@ rake aborted!
 NoMethodError: undefined method 'last_comment' for #<Rake::Application:0x0055a0c4156520>
 /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/rspec-core-2.9.0/lib/rspec/core/rake_task.rb:124:in 'initialize'
 
+# Probar validates :name, presence: true en User
+
+~/ruby/microposts$ rails console --sandbox
+2.0.0-p648 :001 > u = User.new(name: "", email: "test@mail.com")
+ => #<User id: nil, name: "", email: "test@mail.com", created_at: nil, updated_at: nil> 
+2.0.0-p648 :003 > u.save
+   (0.1ms)  SAVEPOINT active_record_1
+   (0.1ms)  ROLLBACK TO SAVEPOINT active_record_1
+ => false 
+2.0.0-p648 :005 > u.valid?
+ => false 
+2.0.0-p648 :006 > u.errors
+ => #<ActiveModel::Errors:0x00560b73630b08 @base=#<User id: nil, name: "", email: "test@mail.com", created_at: nil, updated_at: nil>, @messages={:name=>["can't be blank"]}> 
+2.0.0-p648 :007 > u.errors.full_messages
+ => ["Name can't be blank"] 
+ 
 

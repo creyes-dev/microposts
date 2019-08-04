@@ -476,4 +476,77 @@ NoMethodError: undefined method 'last_comment' for #<Rake::Application:0x0055a0c
 2.0.0-p648 :007 > u.errors.full_messages
  => ["Name can't be blank"] 
  
+# Agregar la columna add_index_to_users_email a la tabla Users
+
+~/ruby/microposts$ rails generate migration add_index_to_users_email
+
+      invoke  active_record
+      create    db/migrate/20190804045211_add_index_to_users_email.rb
+
+# Migrar los cambios a la base de datos
+
+~/ruby/microposts$ bundle exec rake db:migrate
+rake aborted!
+NoMethodError: undefined method 'last_comment' for #<Rake::Application:0x005585b839a3f8>
+/home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/rspec-core-2.9.0/lib/rspec/core/rake_task.rb:124:in 'initialize'
+/home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/rspec-rails-2.9.0/lib/rspec/rails/tasks/rspec.rake:19:in 'new'
+/home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/rspec-rails-2.9.0/lib/rspec/rails/tasks/rspec.rake:19:in '<top (required)>'
+
+# Algo se rompio... pero lo arregle, gemfile.lock apuntaba a rake 12.3.3, correspondia 0.9.6
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddIndexToUsersEmail: migrating ===========================================
+==  AddIndexToUsersEmail: migrated (0.0000s) ==================================
+
+# Pero noté que la migración no contiene ningun cambio:
+
+#class AddIndexToUsersEmail < ActiveRecord::Migration
+#  def change
+#  end
+#end
+
+# Procedo a hacer un rollback de la migración y volver a efectuarla
+
+~/ruby/microposts$ rake db:rollback STEP=1
+==  AddIndexToUsersEmail: reverting ===========================================
+==  AddIndexToUsersEmail: reverted (0.0000s) ==================================
+
+~/ruby/microposts$ rake db:migrate:status
+
+database: db/development.sqlite3
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20190730024420  Create users
+   up     20190730042309  Create microposts
+  down    20190804045211  Add index to users email
+
+# Vuelvo a generar la migración
+
+~/ruby/microposts$ rails generate migration add_index_to_users_email
+
+      invoke  active_record
+      create    db/migrate/20190804052749_add_index_to_users_email.rb
+
+# Me di cuenta que hay que programar la migración, debemos agregar manualmente 
+# la instrucción de agregar un indice por el nombre y el email
+
+# ahora si migrar los cambios 
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddIndexToUsersEmail: migrating ===========================================
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0005s
+==  AddIndexToUsersEmail: migrated (0.0006s) ==================================
+
+~/ruby/microposts$ rake db:migrate:status
+
+database: db/development.sqlite3
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20190730024420  Create users
+   up     20190730042309  Create microposts
+   up     20190804052749  Add index to users email
+
 

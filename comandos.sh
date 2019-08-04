@@ -397,4 +397,67 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
       invoke  rspec
       create    spec/requests/user_pages_spec.rb
 
+# Crear un objeto del modelo User en la consola sin persistirlo
+
+~/ruby/microposts$ rails console --sandbox
+
+2.0.0-p648 :003 > User.all
+  User Load (0.2ms)  SELECT "users".* FROM "users" 
+ => [#<User id: 1, name: "Cristian", email: "creyes.dev@gmail.com", created_at: "2019-07-30 03:25:37", updated_at: "2019-07-30 03:27:21">] 
+2.0.0-p648 :004 > user = User.new(name: "Mr Console", email: "imconsole@mail.com")
+ => #<User id: nil, name: "Mr Console", email: "imconsole@mail.com", created_at: nil, updated_at: nil> 
+2.0.0-p648 :005 > User.all
+  User Load (0.1ms)  SELECT "users".* FROM "users" 
+ => [#<User id: 1, name: "Cristian", email: "creyes.dev@gmail.com", created_at: "2019-07-30 03:25:37", updated_at: "2019-07-30 03:27:21">] 
+2.0.0-p648 :006 > user.save
+   (0.1ms)  SAVEPOINT active_record_1
+  SQL (40.3ms)  INSERT INTO "users" ("created_at", "email", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Sun, 04 Aug 2019 00:44:24 UTC +00:00], ["email", "imconsole@mail.com"], ["name", "Mr Console"], ["updated_at", Sun, 04 Aug 2019 00:44:24 UTC +00:00]]
+   (0.1ms)  RELEASE SAVEPOINT active_record_1
+ => true 
+2.0.0-p648 :007 > User.all
+  User Load (0.1ms)  SELECT "users".* FROM "users" 
+ => [ #<User id: 1, name: "Cristian", email: "creyes.dev@gmail.com", created_at: "2019-07-30 03:25:37", updated_at: "2019-07-30 03:27:21">, 
+      #<User id: 2, name: "Mr Console", email: "imconsole@mail.com", created_at: "2019-08-04 00:44:24", updated_at: "2019-08-04 00:44:24">]
+
+# Buscar un registro con un valor específico utilizando find_by_*
+
+2.0.0-p648 :008 > User.find_by_email("imconsole@mail.com")
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = 'imconsole@mail.com' LIMIT 1
+ => #<User id: 2, name: "Mr Console", email: "imconsole@mail.com", created_at: "2019-08-04 00:44:24", updated_at: "2019-08-04 00:44:24"> 
+
+# Modificar la propiedad email utilizando el método reload
+
+2.0.0-p648 :009 > user.email = "imconsole@rails.com"
+ => "imconsole@rails.com" 
+2.0.0-p648 :012 > user.reload.email
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+ => "imconsole@mail.com" 
+
+# Modificar varios valores de un objeto y almacenarlas en la base de datos al mismo tiempo utilizando update_attributes
+
+2.0.0-p648 :014 > user.update_attributes(name: "Mr. Console", email: "console_san@yahoo.co.jp")
+   (0.1ms)  SAVEPOINT active_record_1
+   (0.1ms)  UPDATE "users" SET "name" = 'Mr. Console', "email" = 'console_san@yahoo.co.jp', "updated_at" = '2019-08-04 00:53:28.882286' WHERE "users"."id" = 2
+   (0.1ms)  RELEASE SAVEPOINT active_record_1
+ => true 
+2.0.0-p648 :015 > user.email
+ => "console_san@yahoo.co.jp" 
+
+# Al salir se pierden los cambios por ejecutar rails console --sandbox
+
+2.0.0-p648 :016 > exit
+   (0.2ms)  rollback transaction
+
+# Crear pruebas unitarias de los objetos de la clase /app/models/User
+
+~/ruby/microposts$ bundle exec rspec spec/models/user_spec.rb
+
+# La base de datos en ambiente de testing no sabe acerca del modelo de datos, procedemos a crear 
+# una base de datos de testing que posea la estructura correcta
+
+~/ruby/microposts$ bundle exec rake db:test:prepare
+rake aborted!
+NoMethodError: undefined method 'last_comment' for #<Rake::Application:0x0055a0c4156520>
+/home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/rspec-core-2.9.0/lib/rspec/core/rake_task.rb:124:in 'initialize'
+
 

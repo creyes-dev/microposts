@@ -549,4 +549,144 @@ database: db/development.sqlite3
    up     20190730042309  Create microposts
    up     20190804052749  Add index to users email
 
+# Instalar bcrypt-ruby 3.0.1
+
+~/ruby/microposts$ bundle install
+Fetching gem metadata from https://rubygems.org/.............
+Fetching gem metadata from https://rubygems.org/.
+Resolving dependencies...
+Using rake 0.9.6
+Using concurrent-ruby 1.1.5
+Using i18n 0.9.5
+Using multi_json 1.13.1
+Using activesupport 3.2.3
+Using builder 3.0.4
+Using activemodel 3.2.3
+Using erubis 2.7.0
+Using journey 1.0.4
+Using rack 1.4.7
+Using rack-cache 1.9.0
+Using rack-test 0.6.3
+Using hike 1.2.3
+Using tilt 1.4.1
+Using sprockets 2.1.4
+Using actionpack 3.2.3
+Using mime-types 1.25.1
+Using polyglot 0.3.5
+Using treetop 1.4.15
+Using mail 2.4.4
+Using actionmailer 3.2.3
+Using arel 3.0.3
+Using tzinfo 0.3.55
+Using activerecord 3.2.3
+Using activeresource 3.2.3
+Fetching bcrypt-ruby 3.0.1
+Installing bcrypt-ruby 3.0.1 with native extensions
+Using bootstrap-sass 2.0.0
+Using bundler 1.16.6
+Using mini_portile2 2.1.0
+Using nokogiri 1.6.8.1
+Using ffi 1.11.1
+Using childprocess 0.9.0
+Using rubyzip 1.2.3
+Using websocket 1.2.8
+Using selenium-webdriver 2.53.4
+Using xpath 0.1.4
+Using capybara 1.1.2
+Using coffee-script-source 1.12.2
+Using execjs 2.7.0
+Using coffee-script 2.4.1
+Using rack-ssl 1.3.4
+Using json 1.8.6
+Using rdoc 3.12.2
+Using thor 0.14.6
+Using railties 3.2.3
+Using coffee-rails 3.2.2
+Using diff-lcs 1.1.3
+Using jquery-rails 2.0.1
+Using rails 3.2.3
+Using rb-fsevent 0.10.3
+Using rb-inotify 0.9.10
+Using rspec-core 2.9.0
+Using rspec-expectations 2.9.1
+Using rspec-mocks 2.9.0
+Using rspec 2.9.0
+Using rspec-rails 2.9.0
+Using sass-listen 4.0.0
+Using sass 3.7.4
+Using sass-rails 3.2.4
+Using sqlite3 1.3.5
+Using uglifier 1.2.3
+Bundle complete! 11 Gemfile dependencies, 61 gems now installed.
+Gems in the group production were not installed.
+Use 'bundle info [gemname]' to see where a bundled gem is installed.
+
+# Agregar la columna password_digest a la tabla users 
+
+~/ruby/microposts$ rails generate migration add_password_digest_to_users password_digest:string
+
+      invoke  active_record
+      create    db/migrate/20190804055002_add_password_digest_to_users.rb
+
+# Migrar la nueva columna a la base de datos
+
+creyes-dev@creyes:~/ruby/microposts$ bundle exec rake db:migrate
+==  AddPasswordDigestToUsers: migrating =======================================
+-- add_column(:users, :password_digest, :string)
+   -> 0.0004s
+==  AddPasswordDigestToUsers: migrated (0.0005s) ==============================
+
+# Aplicar todos los cambios en la base de datos utilizada para testing
+
+~/ruby/microposts$ rake db:test:prepare
+
+# Al verificar el resultados de las pruebas me encuentro con un error, se requiere corregirlo para poder verificar 
+# que las pruebas se estén completando
+
+~/ruby/microposts$ bundle exec rspec spec/
+
+        Called from: /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/actionpack-3.2.3/lib/action_dispatch/middleware/session/abstract_store.rb:28:in 'initialize'.
+Rack::File headers parameter replaces cache_control after Rack 1.5.
+/home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/activemodel-3.2.3/lib/active_model/validations/length.rb:27:in 'check_validity!': Range unspecified. Specify the :in, :within, :maximum, :minimum, or :is option. (ArgumentError)
+	from /home/creyes-dev/.rvm/gems/ruby-2.0.0-p648/gems/activemodel-3.2.3/lib/active_model/validator.rb:143:in 'initialize'
+
+# Me olvide de generar la migración de agregar la columna password
+
+~/ruby/microposts$ rails generate migration add_password_to_users password:string
+
+      invoke  active_record
+      create    db/migrate/20190804172731_add_password_to_users.rb
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddPasswordToUsers: migrating =============================================
+-- add_column(:users, :password, :string)
+   -> 0.0004s
+==  AddPasswordToUsers: migrated (0.0004s) ====================================
+
+# Instanciar objetos User para verificar que se cumplan las validaciones
+
+rails console
+2.0.0-p648 :001 > u = User.new(password_confirmation: "hey")
+ActiveRecord::UnknownAttributeError: unknown attribute: password_confirmation
+
+# La tabla User no debe contener la columna password, solo debe mantener la columna password_digest
+
+~/ruby/microposts$ rake db:rollback STEP=1
+==  AddPasswordToUsers: reverting =============================================
+-- remove_column("users", :password)
+   -> 0.0283s
+==  AddPasswordToUsers: reverted (0.0284s) ====================================
+
+~/ruby/microposts$ rake db:migrate:status
+
+database: db/development.sqlite3
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20190730024420  Create users
+   up     20190730042309  Create microposts
+   up     20190804052749  Add index to users email
+   up     20190804055002  Add password digest to users
+  down    20190804172731  Add password to users
+
 

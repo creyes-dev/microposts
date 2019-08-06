@@ -17,7 +17,7 @@ Microposts::Application.routes.draw do
   # get "static_pages/contact"
 
   resources :microposts
-  resources :users
+  resources :users # Con esta linea nos aseguramos que las acciones de users tengan rutas diseñadas según lo especifica rest
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

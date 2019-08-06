@@ -15,7 +15,7 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
 
-  it { shound be_valid }
+  it { should be_valid }
 
   describe "when name is not present" do
     before { @user.name = " " }

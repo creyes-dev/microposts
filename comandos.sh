@@ -711,5 +711,23 @@ database: db/development.sqlite3
  => false 
 2.0.0-p648 :009 > u.errors.full_messages => ["Password doesn't match confirmation", "Password is too short (minimum is 6 characters)"] 
 
+# Instanciar y registrar un nuevo User en la base de datos
 
+2.0.0-p648 :015 > User.create(name: "Cristian", email:"cr@mail.com", password: "pass123456", password_confirmation: "pass123456")
+   (0.1ms)  begin transaction
+  User Exists (0.1ms)  SELECT 1 FROM "users" WHERE LOWER("users"."email") = LOWER('cr@mail.com') LIMIT 1
+Binary data inserted for `string` type on column `password_digest`
+  SQL (19.4ms)  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Tue, 06 Aug 2019 02:32:38 UTC +00:00], ["email", "cr@mail.com"], ["name", "Cristian"], ["password_digest", "$2a$10$70YDYrsFp.d8nvxAtIvilOdFyViNzjE3VANw4UICCmvpQD3TGwGQS"], ["updated_at", Tue, 06 Aug 2019 02:32:38 UTC +00:00]]
+   (89.9ms)  commit transaction
+ => #<User id: 2, name: "Cristian", email: "cr@mail.com", created_at: "2019-08-06 02:32:38", updated_at: "2019-08-06 02:32:38", password_digest: "$2a$10$70YDYrsFp.d8nvxAtIvilOdFyViNzjE3VANw4UICCmvp..."> 
+2.0.0-p648 :016 > User.all
+  User Load (0.2ms)  SELECT "users".* FROM "users" 
+ => [#<User id: 2, name: "Cristian", email: "cr@mail.com", created_at: "2019-08-06 02:32:38", updated_at: "2019-08-06 02:32:38", password_digest: "$2a$10$70YDYrsFp.d8nvxAtIvilOdFyViNzjE3VANw4UICCmvp...">] 
+
+# Probar la autenticación del usuario registrado
+
+2.0.0-p648 :018 > u.authenticate("password_no_valido")
+ => false 
+2.0.0-p648 :020 > u.authenticate("pass123456")
+ => #<User id: 2, name: "Cristian", email: "cr@mail.com", created_at: "2019-08-06 02:32:38", updated_at: "2019-08-06 02:32:38", password_digest: "$2a$10$70YDYrsFp.d8nvxAtIvilOdFyViNzjE3VANw4UICCmvp..."> 
 

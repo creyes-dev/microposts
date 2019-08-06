@@ -689,4 +689,27 @@ database: db/development.sqlite3
    up     20190804055002  Add password digest to users
   down    20190804172731  Add password to users
 
+# Probar validaciones
+
+2.0.0-p648 :001 > u = User.new(name: "nombre", email: "mail", password: "abc123", password_confirmation: "abc123")
+ => #<User id: nil, name: "nombre", email: "mail", created_at: nil, updated_at: nil, password_digest: "$2a$10$vmbg53B7b19.j/UEHvVOleInSn1xRZlzPG12i51g9N7N..."> 
+2.0.0-p648 :002 > u.valid?
+  User Exists (0.2ms)  SELECT 1 FROM "users" WHERE LOWER("users"."email") = LOWER('mail') LIMIT 1
+ => false 
+2.0.0-p648 :003 > u.errors.full_messages
+ => ["Email is invalid"] 
+
+2.0.0-p648 :004 > u = User.new(name: " ", email: "", password: "abc123", password_confirmation: "abc123")
+ => #<User id: nil, name: " ", email: "", created_at: nil, updated_at: nil, password_digest: "$2a$10$OTyKPQzhXLG43ftR2d.YU.gtFoofVdlsX0XNoS9bzER/..."> 
+2.0.0-p648 :005 > u.valid?
+  User Exists (0.2ms)  SELECT 1 FROM "users" WHERE LOWER("users"."email") = LOWER('') LIMIT 1
+ => false 
+2.0.0-p648 :006 > u.errors.full_messages => ["Name can't be blank", "Email can't be blank", "Email is invalid"] 
+
+2.0.0-p648 :008 > u.valid?
+  User Exists (0.2ms)  SELECT 1 FROM "users" WHERE LOWER("users"."email") = LOWER('mail@mail.com') LIMIT 1
+ => false 
+2.0.0-p648 :009 > u.errors.full_messages => ["Password doesn't match confirmation", "Password is too short (minimum is 6 characters)"] 
+
+
 

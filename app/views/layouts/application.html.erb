@@ -12,6 +12,7 @@
         <div class="container">
             <%= yield %> <!-- Aca va el contenido de las páginas que dependen de este layout -->
             <%= render 'layouts/footer' %>
+            <%= debug(params) if Rails.env.development? %>
         </div>
     </body>
 </html>

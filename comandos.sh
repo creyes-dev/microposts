@@ -806,3 +806,15 @@ Bundle complete! 12 Gemfile dependencies, 63 gems now installed.
 Gems in the group production were not installed.
 Use 'bundle info [gemname]' to see where a bundled gem is installed.
 
+# Crear un nuevo usuario para probar gravatar
+~/ruby/microposts$ rails console
+
+2.0.0-p648 :001 > User.create(name: "Mr Rails", email:"example@railstutorial.org", password: "Foobar20", password_confirmation: "Foobar20")
+   (0.1ms)  begin transaction
+  User Exists (18.1ms)  SELECT 1 FROM "users" WHERE LOWER("users"."email") = LOWER('example@railstutorial.org') LIMIT 1
+Binary data inserted for `string` type on column `password_digest`
+  SQL (22.8ms)  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 10 Aug 2019 15:31:12 UTC +00:00], ["email", "example@railstutorial.org"], ["name", "Mr Rails"], ["password_digest", "$2a$10$d7yrnwNjtUcJHaGygUAgmu3TOCXYiM5WzBjUH57K4a/fHWTkIBJli"], ["updated_at", Sat, 10 Aug 2019 15:31:12 UTC +00:00]]
+   (99.6ms)  commit transaction
+ => #<User id: 3, name: "Mr Rails", email: "example@railstutorial.org", created_at: "2019-08-10 15:31:12", updated_at: "2019-08-10 15:31:12", password_digest: "$2a$10$d7yrnwNjtUcJHaGygUAgmu3TOCXYiM5WzBjUH57K4a/f..."> 
+
+

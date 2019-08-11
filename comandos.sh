@@ -817,4 +817,33 @@ Binary data inserted for `string` type on column `password_digest`
    (99.6ms)  commit transaction
  => #<User id: 3, name: "Mr Rails", email: "example@railstutorial.org", created_at: "2019-08-10 15:31:12", updated_at: "2019-08-10 15:31:12", password_digest: "$2a$10$d7yrnwNjtUcJHaGygUAgmu3TOCXYiM5WzBjUH57K4a/f..."> 
 
+# Probar registro de Usuarios, 
+# borrar todas las tablas y volver a crearlas en la base de datos 
+~/ruby/microposts$ bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.1467s
+-- create_table("users", {:force=>true})
+   -> 0.0675s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.0785s
+-- initialize_schema_migrations_table()
+   -> 0.2132s
+-- assume_migrated_upto_version(20190804055002, ["/home/creyes-dev/ruby/microposts/db/migrate"])
+   -> 0.3888s
+You have 1 pending migrations:
+  20190804172731 AddPasswordToUsers
+Run 'rake db:migrate' to update your database then try again.
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddPasswordToUsers: migrating =============================================
+-- add_column(:users, :password, :string)
+   -> 0.0005s
+==  AddPasswordToUsers: migrated (0.0005s) ====================================
+
+~/ruby/microposts$ rake db:rollback STEP=1
+==  AddPasswordToUsers: reverting =============================================
+-- remove_column("users", :password)
+   -> 0.0068s
+==  AddPasswordToUsers: reverted (0.0069s) ====================================
+
 

@@ -846,4 +846,26 @@ Run 'rake db:migrate' to update your database then try again.
    -> 0.0068s
 ==  AddPasswordToUsers: reverted (0.0069s) ====================================
 
+# Crear un controller para mostrar el formulario de login, 
+# autenticar e iniciar la sesión de un usuario y eliminar la sesión de un usuario
+
+~/ruby/microposts$ rails generate controller Sessions --no-test-framework
+
+      create  app/controllers/sessions_controller.rb
+      invoke  erb
+      create    app/views/sessions
+      invoke  helper
+      create    app/helpers/sessions_helper.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/sessions.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/sessions.css.scss
+
+# Generar test de integración de la página que se utilizará para autenticar usuarios
+
+~/ruby/microposts$ rails generate integration_test authentication_pages
+
+      invoke  rspec
+      create    spec/requests/authentication_pages_spec.rb
 

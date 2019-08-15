@@ -846,6 +846,11 @@ Run 'rake db:migrate' to update your database then try again.
    -> 0.0068s
 ==  AddPasswordToUsers: reverted (0.0069s) ====================================
 
+~/ruby/microposts$ rake db:test:prepare
+You have 1 pending migrations:
+  20190804172731 AddPasswordToUsers
+
+
 # Crear un controller para mostrar el formulario de login, 
 # autenticar e iniciar la sesión de un usuario y eliminar la sesión de un usuario
 
@@ -868,4 +873,18 @@ Run 'rake db:migrate' to update your database then try again.
 
       invoke  rspec
       create    spec/requests/authentication_pages_spec.rb
+
+# Configurar solargraph 
+
+~/ruby/microposts$ which solargraph
+
+/home/creyes-dev/.rvm/gems/ruby-2.5.1/bin/solargraph # pegarlo donde corresponda
+
+# Inicializar el archivo de configuracion
+
+~/ruby/microposts$ solargraph config
+
+Configuration file initialized.
+
+# Preparar la aplicación para solargraph
 

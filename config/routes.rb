@@ -8,8 +8,9 @@ Microposts::Application.routes.draw do
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
   match '/contact', to: 'static_pages#contact'
-  match '/signin', to: 'static_pages#home'
   match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete # ruta de cierre de sesión, se invoca usando el request Http Delete
 
   # get "static_pages/home"
   # get "static_pages/help"
@@ -18,6 +19,7 @@ Microposts::Application.routes.draw do
 
   resources :microposts
   resources :users # Con esta linea nos aseguramos que las acciones de users tengan rutas diseñadas según lo especifica rest
+  resources :sessions, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

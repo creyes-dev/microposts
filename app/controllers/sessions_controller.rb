@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   def new
-    
   end
 
   def create
@@ -10,11 +9,11 @@ class SessionsController < ApplicationController
       # Iniciar sesión del usuario y redirigir a la página del perfil del usuario
     else
       # Crear un mensaje de error y volver a renderear el formulario de login
+      flash.now[:error] = 'Invalid email/password combination' # No esta bien
+      render 'new'
     end
   end
 
   def destroy
-    
   end
-  
 end

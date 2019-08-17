@@ -886,5 +886,23 @@ You have 1 pending migrations:
 
 Configuration file initialized.
 
-# Preparar la aplicación para solargraph
+# Agregar la columna remember_token
+
+~/ruby/microposts$ rails generate migration add_remember_token_to_users
+
+     invoke  active_record
+      create    db/migrate/20190816034728_add_remember_token_to_users.rb
+
+# Actualizar las bases de datos en entorno de desarollo y testing
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddRememberTokenToUsers: migrating ========================================
+-- add_column(:users, :remember_token, :string)
+   -> 0.0006s
+-- add_index(:users, :remember_token)
+   -> 0.0167s
+==  AddRememberTokenToUsers: migrated (0.0174s) ===============================
+
+~/ruby/microposts$ bundle exec rake db:test:prepare
+
 

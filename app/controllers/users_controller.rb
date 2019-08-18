@@ -19,14 +19,9 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
-    # Instanciamos un usuario para que el mismo posea en su estado
+    # Instanciamos un usuario para que posteriormente el mismo posea en su estado
     # los valores de los campos presentes en los controles del formulario de registro
     @user = User.new
-
-    #respond_to do |format|
-    #  format.html # new.html.erb
-    #  format.json { render json: @user }
-    #end
   end
 
   # GET /users/1/edit
@@ -39,6 +34,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
+      # iniciar sesion del usuario
+      sign_in @user
       # handle successful save.
       flash[:success] = "Welcome to the Sample App!" # flash solo mantendrá su estado durante la actual respuesta
       redirect_to @user # redireccionar a /users/id, ejecutar la acción show

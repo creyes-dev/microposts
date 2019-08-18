@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  # Antes de ejecutar la acción edit o update ejecutar el método before_filter
+  before_filter :signed_in_user, only: [:edit, :update]
+
   # GET /users
   # GET /users.json
   def index
@@ -68,5 +72,12 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  # Si el usuario no posee una sesión iniciada entonces se redirige a la ruta signin_path
+  def signed_in_user
+    redirect_to signin_path, notice: "please sign in." unless signed_in?
   end
 end

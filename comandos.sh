@@ -1003,4 +1003,6 @@ Use 'bundle info [gemname]' to see where a bundled gem is installed.
         gsub  config/database.yml
        force  config/database.yml
 
+# Efectuar la prueba de comportamiento de cucumber
+~/ruby/microposts$ bundle exec cucumber features/
 

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   # Antes de ejecutar la acción edit o update ejecutar el método before_filter
   before_filter :signed_in_user, only: [:edit, :update]
+  before_filter :correct_user, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -80,4 +81,10 @@ class UsersController < ApplicationController
   def signed_in_user
     redirect_to signin_path, notice: "please sign in." unless signed_in?
   end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+  end
+
 end

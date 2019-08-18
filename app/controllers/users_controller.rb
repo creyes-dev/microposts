@@ -49,7 +49,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      # handle a successful update
+      flash[:success] = "Profile updated"
+      # Actualizar current_user
+      sign_in @user
+      redirect_to @user
     else
       render 'edit'
     end

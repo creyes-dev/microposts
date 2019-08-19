@@ -79,9 +79,16 @@ class UsersController < ApplicationController
 
   # Si el usuario no posee una sesión iniciada entonces se redirige a la ruta signin_path
   def signed_in_user
-    redirect_to signin_path, notice: "please sign in." unless signed_in?
+    unless signed_in?
+      # Almacenar la ruta solicitada en el request actual por las dudas de que 
+      # el usuario luego se autentique correctamente y corresponda redirigirlo a la 
+      # pagina que inicialmente solicito pero no pudo acceder porque se requiere inicio de sesion
+      store_location
+      redirect_to signin_path, notice: "please sign in."
+    end
   end
 
+  # Si el usuario intenta modificar los datos de otro usuario se lo redirige a la página principal
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user)

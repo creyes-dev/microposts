@@ -33,4 +33,18 @@ module SessionsHelper
   def current_user?
     user == current_user
   end
+
+  # Redirigir a un usuario a una ruta almacenada en la variable de sesión return_to
+  # si dicha variable no existe entonces redirigirlo a la página por defecto
+  # indicada por parámetros
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  # Almacenar una ruta a la que se podrá redirigir al usuario una vez que se cumpla
+  # determinadas condiciones
+  def store_location
+    session[:return_to] = request.fullpath
+  end
 end

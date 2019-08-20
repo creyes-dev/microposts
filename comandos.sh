@@ -1006,3 +1006,22 @@ Use 'bundle info [gemname]' to see where a bundled gem is installed.
 # Efectuar la prueba de comportamiento de cucumber
 ~/ruby/microposts$ bundle exec cucumber features/
 
+# Resetear el origen de datos
+~/ruby/microposts$ bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.1396s
+-- create_table("users", {:force=>true})
+   -> 0.1008s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.1230s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token"})
+   -> 0.1133s
+-- initialize_schema_migrations_table()
+   -> 0.2353s
+-- assume_migrated_upto_version(20190816034728, ["/home/creyes-dev/ruby/microposts/db/migrate"])
+   -> 0.7465s
+
+# Ejecutar la tarea que implementamos para crear usuarios al azar
+~/ruby/microposts$ bundle exec rake db:populate
+~/ruby/microposts$ bundle exec rake db:test:prepare
+

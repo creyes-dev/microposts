@@ -55,8 +55,8 @@ describe User do
 
   describe "when email address is already taken" do
     before do
-      user_with_same_email = @user.dup # clon del objeto creado para hacer pruebas
-      uset_with_same_email.email = @user.email.upcase # las direcciones de mail no son case sensitive
+      user_with_same_email = @user.dup
+      uset_with_same_email.email = @user.email.upcase
       user_with_same_email.save
     end
 

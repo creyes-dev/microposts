@@ -27,8 +27,6 @@ describe "Static Pages" do
     let(:heading) { 'Sample App' }
     let(:page_title) { '' }
     it_should_behave_like "all static pages"
-    # it { should have_selector('title', text: full_title('')) }
-    # it { should have_selector('h1', text: 'Sample App') }
   end
   describe "Help page" do
     before { visit help_path }
@@ -36,8 +34,6 @@ describe "Static Pages" do
     let(:heading) { 'Help' }
     let(:page_title) { 'Help' }
     it_should_behave_like "all static pages"
-    # it { should have_selector('title', text: full_title('Help')) }
-    # it { should have_selector('h1', text: 'Help') }
   end
   describe "About page" do
     before { visit about_path }
@@ -45,8 +41,6 @@ describe "Static Pages" do
     let(:heading) { 'About Us' }
     let(:page_title) { 'About Us' }
     it_should_behave_like "all static pages"
-    # it { should have_selector('title', text: full_title('About Us')) }
-    # it { should have_selector('h1', text: 'About Us') }
   end
   describe "Contact page" do
     before { visit contact_path }
@@ -54,7 +48,5 @@ describe "Static Pages" do
     let(:heading) { 'Contact' }
     let(:page_title) { 'Contact' }
     it_should_behave_like "all static pages"
-    # it { should have_selector('title', text: full_title('Contact')) }
-    # it { should have_selector('h1', text: 'Contact') }
   end
 end

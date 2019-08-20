@@ -22,7 +22,7 @@ module SessionsHelper
 
   # Método que debe ser consultado para determinar si un usuario posee una sesión iniciada
   def signed_in?
-    :current_user.nil?
+    !current_user.nil?
   end
 
   def sign_out

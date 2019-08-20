@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       # 1. Iniciar sesión del usuario y redirigir a la página del perfil del usuario
       # en sign_in se asignan la instancia del usuario al objeto current_user para que 
       # sea consultado por otros controllers.
-      sign_in @user
+      sign_in user
 
       # 2. Redirigir al usuario a la página que solicitó y la aplicación le denegó el acceso
       # por no estar autenticado, si el usuario fue directo a la página de login redireccionarlo

@@ -1025,3 +1025,10 @@ Use 'bundle info [gemname]' to see where a bundled gem is installed.
 ~/ruby/microposts$ bundle exec rake db:populate
 ~/ruby/microposts$ bundle exec rake db:test:prepare
 
+# Agregar la columna admin a la tabla user
+~/ruby/microposts$ rails generate migration add_admin_to_users admin:boolean
+
+      invoke  active_record
+      create    db/migrate/20190821033930_add_admin_to_users.rb
+
+

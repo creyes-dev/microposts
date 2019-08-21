@@ -1031,4 +1031,13 @@ Use 'bundle info [gemname]' to see where a bundled gem is installed.
       invoke  active_record
       create    db/migrate/20190821033930_add_admin_to_users.rb
 
+# aplicar el cambio de definir el valor por defecto de la columna admin en falso
+# que escribimos en el migration
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddAdminToUsers: migrating ================================================
+-- add_column(:users, :admin, :boolean, {:default=>false})
+   -> 0.0185s
+==  AddAdminToUsers: migrated (0.0186s) =======================================
+
+~/ruby/microposts$ bundle exec rake db:test:prepare
 

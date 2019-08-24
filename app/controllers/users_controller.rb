@@ -2,8 +2,9 @@ class UsersController < ApplicationController
 
   # Antes de ejecutar la acción index, edit o update del presente controller 
   # ejecutar el método before_filter
-  before_filter :signed_in_user, only: [:index, :edit, :update]
-  before_filter :correct_user, only: [:edit, :update]
+  before_filter :signed_in_user,  only: [:index, :edit, :update, :destroy]
+  before_filter :correct_user,    only: [:edit, :update]
+  before_filter :admin_user,      only: :destroy
 
   # GET /users
   # GET /users.json
@@ -62,13 +63,9 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+    @user = User.find(params[:id]).destroy
+    flash[:success] = "User destroyed."
+    redirect_to users_path
   end
 
   private
@@ -88,6 +85,10 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user)
+  end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
 
 end

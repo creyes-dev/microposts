@@ -1041,3 +1041,22 @@ Use 'bundle info [gemname]' to see where a bundled gem is installed.
 
 ~/ruby/microposts$ bundle exec rake db:test:prepare
 
+# Vaciar la base de datos, volver a llenarla utilizando la tarea populate que agrega admin:true
+# al primer usuario que se va a crear de los 100 usuarios que se crean
+
+~/ruby/microposts$ bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.1328s
+-- create_table("users", {:force=>true})
+   -> 0.1343s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.1007s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token"})
+   -> 0.1009s
+-- initialize_schema_migrations_table()
+   -> 0.2354s
+-- assume_migrated_upto_version(20190821033930, ["/home/creyes-dev/ruby/microposts/db/migrate"])
+   -> 0.8665s
+
+~/ruby/microposts$ bundle exec rake db:populate
+~/ruby/microposts$ bundle exec rake db:test:prepare

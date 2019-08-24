@@ -30,9 +30,9 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-  def current_user?
-    user == current_user
-  end
+	def current_user?(user)
+		user == current_user
+	end
 
   # Redirigir a un usuario a una ruta almacenada en la variable de sesión return_to
   # si dicha variable no existe entonces redirigirlo a la página por defecto

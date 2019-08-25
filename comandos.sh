@@ -1060,3 +1060,17 @@ Use 'bundle info [gemname]' to see where a bundled gem is installed.
 
 ~/ruby/microposts$ bundle exec rake db:populate
 ~/ruby/microposts$ bundle exec rake db:test:prepare
+
+# Asignar las columnas user_id y created_at como indices de la tabla Microposts
+
+~/ruby/microposts$ rails generate migration add_index_to_microposts_user_id
+
+invoke  active_record
+create    db/migrate/20190824152303_add_index_to_microposts_user_id.rb
+
+~/ruby/microposts$ bundle exec rake db:migrate
+==  AddIndexToMicropostsUserId: migrating =====================================
+==  AddIndexToMicropostsUserId: migrated (0.0000s) ============================
+
+~/ruby/microposts$ bundle exec rake db:test:prepare
+

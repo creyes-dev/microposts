@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
 
   before_save { self.email.downcase! } # justo antes de guardar usar solo minúsculas en el mail
   before_save :create_remember_token   # Callback create_remember_tolken es disparado antes de que se registre el usuario

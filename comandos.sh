@@ -1074,3 +1074,23 @@ create    db/migrate/20190824152303_add_index_to_microposts_user_id.rb
 
 ~/ruby/microposts$ bundle exec rake db:test:prepare
 
+# Luego de modificar la tarea de llenar registros en la base de datos volver a generar el esquema 
+# de la base de datos y volver a llenar todos los registros
+
+~/ruby/microposts$ bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.1362s
+-- create_table("users", {:force=>true})
+   -> 0.1453s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.1342s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token"})
+   -> 0.1229s
+-- initialize_schema_migrations_table()
+   -> 0.2586s
+-- assume_migrated_upto_version(20190824152303, ["/home/creyes-dev/ruby/microposts/db/migrate"])
+   -> 1.0017s
+
+~/ruby/microposts$ bundle exec rake db:populate
+~/ruby/microposts$ bundle exec rake db:test:prepare
+

@@ -1111,5 +1111,18 @@ create    db/migrate/20190824152303_add_index_to_microposts_user_id.rb
       invoke    rspec
       create      spec/models/relationship_spec.rb
 
+# Migrar la tabla relationships a la base de datos
 
+~/ruby/microposts$ bundle exec rake db:migrate
+==  CreateRelationships: migrating ============================================
+-- create_table(:relationships)
+   -> 0.0156s
+-- add_index(:relationships, :follower_id)
+   -> 0.0005s
+-- add_index(:relationships, :followed_id)
+   -> 0.0006s
+-- add_index(:relationships, [:follower_id, :followed_id], {:unique=>true})
+   -> 0.0007s
+==  CreateRelationships: migrated (0.0178s) ===================================
 
+~/ruby/microposts$ bundle exec rake db:test:prepare

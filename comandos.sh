@@ -1101,5 +1101,15 @@ create    db/migrate/20190824152303_add_index_to_microposts_user_id.rb
       invoke  rspec
       create    spec/requests/micropost_pages_spec.rb
 
+# Crear el model y la tabla Relationship
+
+~/ruby/microposts$ rails generate model Relationship follower_id:integer followed_id:integer
+
+      invoke  active_record
+      create    db/migrate/20190826230849_create_relationships.rb
+      create    app/models/relationship.rb
+      invoke    rspec
+      create      spec/models/relationship_spec.rb
+
 
 

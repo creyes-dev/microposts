@@ -1094,3 +1094,12 @@ create    db/migrate/20190824152303_add_index_to_microposts_user_id.rb
 ~/ruby/microposts$ bundle exec rake db:populate
 ~/ruby/microposts$ bundle exec rake db:test:prepare
 
+# Crear pruebas de integracion de las paginas de los microposts
+
+~/ruby/microposts$ rails generate integration_test micropost_pages
+ 
+      invoke  rspec
+      create    spec/requests/micropost_pages_spec.rb
+
+
+

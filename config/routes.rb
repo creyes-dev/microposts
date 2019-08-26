@@ -17,7 +17,7 @@ Microposts::Application.routes.draw do
   # get "static_pages/about"
   # get "static_pages/contact"
 
-  resources :microposts
+  resources :microposts, only: [:create, :destroy]
   resources :users # Con esta linea nos aseguramos que las acciones de users tengan rutas diseñadas según lo especifica rest
   resources :sessions, only: [:new, :create, :destroy]
 

@@ -32,7 +32,14 @@ module SessionsHelper
 
 	def current_user?(user)
 		user == current_user
-	end
+  end
+  
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_path, notice: "Please sign in."
+    end
+  end
 
   # Redirigir a un usuario a una ruta almacenada en la variable de sesión return_to
   # si dicha variable no existe entonces redirigirlo a la página por defecto

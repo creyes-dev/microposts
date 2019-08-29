@@ -1126,3 +1126,30 @@ create    db/migrate/20190824152303_add_index_to_microposts_user_id.rb
 ==  CreateRelationships: migrated (0.0178s) ===================================
 
 ~/ruby/microposts$ bundle exec rake db:test:prepare
+
+# Vaciar y volver a llenar la base de datos
+
+~/ruby/microposts$ bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.1291s
+-- create_table("relationships", {:force=>true})
+   -> 0.1241s
+-- add_index("relationships", ["followed_id"], {:name=>"index_relationships_on_followed_id"})
+   -> 0.1232s
+-- add_index("relationships", ["follower_id", "followed_id"], {:name=>"index_relationships_on_follower_id_and_followed_id", :unique=>true})
+   -> 0.1006s
+-- add_index("relationships", ["follower_id"], {:name=>"index_relationships_on_follower_id"})
+   -> 0.1120s
+-- create_table("users", {:force=>true})
+   -> 0.1119s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.1343s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token"})
+   -> 0.0898s
+-- initialize_schema_migrations_table()
+   -> 0.2352s
+-- assume_migrated_upto_version(20190826230849, ["/home/creyes-dev/ruby/microposts/db/migrate"])
+   -> 1.0432s
+~/ruby/microposts$ bundle exec rake db:populate
+~/ruby/microposts$ bundle exec rake db:test:prepare
+

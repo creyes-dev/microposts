@@ -1,7 +1,5 @@
 Microposts::Application.routes.draw do
 
-  get "users/new"
-
   root to: 'static_pages#home'
 
   match '/help', to: 'static_pages#help' # válido para help_path y /help, la diferencia no importa
@@ -18,7 +16,13 @@ Microposts::Application.routes.draw do
   # get "static_pages/contact"
 
   resources :microposts, only: [:create, :destroy]
-  resources :users # Con esta linea nos aseguramos que las acciones de users tengan rutas diseñadas según lo especifica rest
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation:

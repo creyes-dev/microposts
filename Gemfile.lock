@@ -168,7 +168,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     websocket (1.2.8)
-    will_paginate (3.0.3)
+    will_paginate (3.0.5)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -191,7 +191,7 @@ DEPENDENCIES
   sass-rails (= 3.2.4)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
-  will_paginate (= 3.0.3)
+  will_paginate (= 3.0.5)
 
 BUNDLED WITH
    1.16.6
